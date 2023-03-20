@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('users/conexion.php');
+require_once ('conexion.php');
 
 $username = isset($_POST['username'])? $_POST['username']:'';
 $password = isset($_POST['pass'])? $_POST['pass']:'';
@@ -24,7 +24,7 @@ if ($username && $password) {
 		$message = 'Successfully logged';
 		header('location: /admin.php');
 	} else {
-		$message = 'Passwords do not match';
+		$message = 'Los datos ingresados no son correctos';
 	}
 }
 ?>
