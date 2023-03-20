@@ -21,7 +21,7 @@ if ($username && $password) {
 			'username' => $results['username']
 		];
 
-		$message = 'Exito';
+		$message = 'Successfully logged';
 		header('location: /admin.php');
 	} else {
 		$message = 'Passwords do not match';
