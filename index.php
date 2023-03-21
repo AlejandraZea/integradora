@@ -1,17 +1,19 @@
 <?php
-session_start();
-require_once ('conexion.php');
+session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
+require_once ('conexion.php'); //conexion a la base de datos
 
-$username = isset($_POST['username'])? $_POST['username']:'';
-$password = isset($_POST['pass'])? $_POST['pass']:'';
+//variables de sesion
+$username = isset($_POST['username'])? $_POST['username']:''; 
+$password = isset($_POST['pass'])? $_POST['pass']:''; 
 $message = '';
-
+//si contiene usuario y contraseña 
 if ($username && $password) {
 	$records = $conn->prepare('SELECT id, name, lastname, username, password FROM users where username=:username LIMIT 1');
 	$records->bindParam(':username', $username);
 	$records->execute();
 	$results = $records->fetch(PDO::FETCH_ASSOC);
-
+	
+	//verificar el password
 	if ($results && password_verify($password, $results['password'])) {
 		$_SESSION['id'] = $results['id'];
 		$_SESSION['user'] = [
