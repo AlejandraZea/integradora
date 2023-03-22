@@ -1,6 +1,8 @@
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
 Comentario de prueba
+
+Que rollo esto es un comentario, demen tamales
 -->
 <!DOCTYPE html>
 <html lang="es">
