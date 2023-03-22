@@ -22,7 +22,7 @@ if ($username && $password) {
 			'lastname' => $results['lastname'],
 			'username' => $results['username']
 		];
-
+		//mensaje
 		$message = 'Successfully logged';
 		header('location: /home.php');
 	} else {
