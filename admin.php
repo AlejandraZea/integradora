@@ -32,7 +32,7 @@
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Bienvenidos al sistema de punto de venta La tiendita.
+					Bienvenido
 				</p>
 			</div>
 		</section>
