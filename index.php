@@ -24,7 +24,7 @@ if ($username && $password) {
 		];
 
 		$message = 'Successfully logged';
-		header('location: /admin.php');
+		header('location: /home.php');
 	} else {
 		$message = 'Los datos ingresados no son correctos';
 	}
