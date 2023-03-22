@@ -40,6 +40,7 @@ if ($username && $password) {
 	<link rel="stylesheet" href="/css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="/css/main.css">
+	<link rel="icon" type="image/png" href="/assets/img/favicon.store3.png"/>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="/js/material.min.js" ></script>
@@ -47,6 +48,7 @@ if ($username && $password) {
 	<script src="/js/jquery.mCustomScrollbar.concat.min.js" ></script>
 	<script src="/js/main.js" ></script>
 </head>
+
 <body class="cover">
 	<div class="container-login">
 		<p class="text-center" style="font-size: 80px;">
