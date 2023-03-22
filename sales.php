@@ -1,12 +1,15 @@
 <!-- 
 * Copyright 2016 Carlos Eduardo Alfaro Orellana
+Comentario de prueba
+
+Que rollo esto es un comentario, demen tamales 23
 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sales</title>
+	<title>Ventas</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
