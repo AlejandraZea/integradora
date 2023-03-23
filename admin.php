@@ -1,3 +1,39 @@
+<?php
+session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
+require_once ('conexion.php'); //conexion a la base de datos
+
+//variables de sesion
+$id = isset($_POST['id'])? $_POST['id']:''; 
+$name = isset($_POST['name'])? $_POST['name']:''; 
+$lastname = isset($_POST['lastname'])? $_POST['lastname']:''; 
+$username = isset($_POST['username'])? $_POST['username']:''; 
+$password = isset($_POST['password'])? $_POST['password']:''; 
+$message = '';
+
+//ingresar datos
+if ($username && $password) {
+	$records = $conn->prepare('INSERT INTO users VALUES ($id, $name, $lastname, $username, $password)');
+	//$records->bindParam(':username', $username);
+	$records->execute();
+	
+	//verificar el password
+	if ($results && password_verify($password, $results['password'])) {
+		$_SESSION['id'] = $results['id'];
+		$_SESSION['user'] = [
+			'id' => $results['id'],
+			'name' => $results['name'],
+			'lastname' => $results['lastname'],
+			'username' => $results['username']
+		];
+		//mensaje
+		$message = 'Successfully logged';
+		header('location: /home.php');
+	} else {
+		$message = 'Los datos ingresados no son correctos';
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,6 +60,10 @@
 	<!-- navLateral.php -->
 	<?php require('navigation/lateralnavbar.php')?> 
 
+	<?php if(!empty($message)): ?>
+		<p><?php echo $message ?></p>
+	<?php endif; ?>
+
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
@@ -32,71 +72,63 @@
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Bienvenidos al sistema de punto de venta La tiendita.
+					Bienvenido
 				</p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewAdmin" class="mdl-tabs__tab is-active">NEW</a>
-				<a href="#tabListAdmin" class="mdl-tabs__tab">LIST</a>
+				<a href="#tabNewAdmin" class="mdl-tabs__tab is-active">CREAR USUARIO</a>
+				<a href="#tabListAdmin" class="mdl-tabs__tab">LISTA DE USUARIOS</a>
 			</div>
 			<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-primary text-center tittles">
-								New Administrator
+								Nuevo Usuario
 							</div>
 							<div class="full-width panel-content">
-								<form>
+								<form form action="admin.php">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Data Administrator</h5>
+											<h5 class="text-condensedLight">Datos de usuario</h5>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
-												<label class="mdl-textfield__label" for="DNIAdmin">DNI</label>
-												<span class="mdl-textfield__error">Invalid number</span>
+												<input name="id" class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
+												<label class="mdl-textfield__label" for="DNIAdmin">ID</label>
+												<span class="mdl-textfield__error">Número ID inválido</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NameAdmin">
-												<label class="mdl-textfield__label" for="NameAdmin">Name</label>
-												<span class="mdl-textfield__error">Invalid name</span>
+												<input name="name" class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NameAdmin">
+												<label class="mdl-textfield__label" for="NameAdmin">Nombre</label>
+												<span class="mdl-textfield__error">Nombre inválido</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="LastNameAdmin">
-												<label class="mdl-textfield__label" for="LastNameAdmin">Last Name</label>
-												<span class="mdl-textfield__error">Invalid last name</span>
+												<input name="lastname" class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="LastNameAdmin">
+												<label class="mdl-textfield__label" for="LastNameAdmin">Apellidos</label>
+												<span class="mdl-textfield__error">Apellido inválido</span>
 											</div>
+											<!--  agregar el rol de usuario, hay que crearle su for y el id para rol
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="tel" pattern="-?[0-9+()- ]*(\.[0-9]+)?" id="phoneAdmin">
-												<label class="mdl-textfield__label" for="phoneAdmin">Phone</label>
-												<span class="mdl-textfield__error">Invalid phone number</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="email" id="emailAdmin">
-												<label class="mdl-textfield__label" for="emailAdmin">E-mail</label>
-												<span class="mdl-textfield__error">Invalid E-mail</span>
-											</div>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" id="addressAdmin">
-												<label class="mdl-textfield__label" for="addressAdmin">Address</label>
-												<span class="mdl-textfield__error">Invalid address</span>
-											</div>
+												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="RolUsuario">
+												<label class="mdl-textfield__label" for="LastNameAdmin">Rol de usuario</label>
+												<span class="mdl-textfield__error">Rol de usuario inválido</span>
+											</div> 
+											-->
 										</div>
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-											<h5 class="text-condensedLight">Account Details</h5>
+											<h5 class="text-condensedLight">Detalles de cuenta de usuario</h5>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameAdmin">
-												<label class="mdl-textfield__label" for="UserNameAdmin">User Name</label>
-												<span class="mdl-textfield__error">Invalid user name</span>
+												<input  name="username" class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameAdmin">
+												<label class="mdl-textfield__label" for="UserNameAdmin">Nombre de usuario</label>
+												<span class="mdl-textfield__error">Nombre de usuario inválido</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="password" id="passwordAdmin">
-												<label class="mdl-textfield__label" for="passwordAdmin">Password</label>
-												<span class="mdl-textfield__error">Invalid password</span>
+												<input name="password" class="mdl-textfield__input" type="password" id="passwordAdmin">
+												<label class="mdl-textfield__label" for="passwordAdmin">Contraseña</label>
+												<span class="mdl-textfield__error">Contraseña inválida</span>
 											</div>
-											<h5 class="text-condensedLight">Choose Avatar</h5>
+											<h5 class="text-condensedLight">Selecciona tu avatar</h5>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
 												<input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
 												<img src="assets/img/avatar-male.png" alt="avatar" style="height: 45px; width="45px;" ">
@@ -126,7 +158,7 @@
 										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addAdmin">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
-										<div class="mdl-tooltip" for="btn-addAdmin">Add Administrator</div>
+										<div class="mdl-tooltip" for="btn-addAdmin">Crear usuario</div>
 									</p>
 								</form>
 							</div>
@@ -139,7 +171,7 @@
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
 							<div class="full-width panel-tittle bg-success text-center tittles">
-								List Administrator
+								Lista de usuarios
 							</div>
 							<div class="full-width panel-content">
 								<form action="#">

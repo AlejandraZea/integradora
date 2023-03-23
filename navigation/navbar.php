@@ -8,9 +8,9 @@
 				<ul class="list-unstyle">
 					<li class="btn-exit" id="btn-exit">
 						<i class="zmdi zmdi-power"></i>
-						<div class="mdl-tooltip" for="btn-exit">LogOut</div>
+						<div class="mdl-tooltip" for="btn-exit">Salir</div>
 					</li>
-					<li class="text-condensedLight noLink" ><small>User Name</small></li>
+					<li class="text-condensedLight noLink" ><small>NOMBRE DE USUARIO</small></li>
 					<li class="noLink">
 						<figure>
 							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
