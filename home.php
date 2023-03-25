@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,7 +30,7 @@
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width text-center" style="padding: 40px 0;">
-			<h3 class="text-center tittles">RESPONSIVE TILES</h3>
+			<h3 class="text-center tittles">REGISTROS</h3>
 			<!-- Tiles -->
 			<article class="full-width tile">
 				<div class="tile-text">

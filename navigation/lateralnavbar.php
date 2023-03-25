@@ -1,9 +1,13 @@
+<?php 
+session_start();
+?>
+
 <!-- navLateral.php -->
 <section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
 			<div class="full-width navLateral-body-logo text-center tittles">
-				<i class="zmdi zmdi-close btn-menu"></i> Inventory 
+				<i class="zmdi zmdi-close btn-menu"></i> Punto de Venta 
 			</div>
 			<figure class="full-width" style="height: 77px;">
 				<div class="navLateral-body-cl">
@@ -11,7 +15,7 @@
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
-						Full Name Admin<br>
+						<?php echo $_SESSION['user']['name'] . " " . $_SESSION['user']['lastname']; ?> <br>
 						<small>Admin</small>
 					</span>
 				</figcaption>
@@ -43,7 +47,7 @@
 							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
 						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
+						<!--		<li class="full-width">
 								<a href="company.php" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-balance"></i>
@@ -53,6 +57,7 @@
 									</div>
 								</a>
 							</li>
+
 							<li class="full-width">
 								<a href="providers.php" class="full-width">
 									<div class="navLateral-body-cl">
@@ -62,7 +67,8 @@
 										PROVEEDORES
 									</div>
 								</a>
-							</li>
+							</li>                 -->
+								
 							<li class="full-width">
 								<a href="payments.php" class="full-width">
 									<div class="navLateral-body-cl">
@@ -107,7 +113,7 @@
 									</div>
 								</a>
 							</li>
-							<li class="full-width">
+						<!--	<li class="full-width">
 								<a href="client.php" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-accounts"></i>
@@ -116,7 +122,7 @@
 										CLIENTES
 									</div>
 								</a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<li class="full-width divider-menu-h"></li>
@@ -130,6 +136,8 @@
 							</div>
 						</a>
 					</li>
+
+					<!-- 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="sales.php" class="full-width">
@@ -140,7 +148,10 @@
 								VENTAS
 							</div>
 						</a>
-					</li>
+					</li> -->
+
+
+					<!-- 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="inventory.php" class="full-width">
@@ -151,7 +162,9 @@
 								INVENTARIOS
 							</div>
 						</a>
-					</li>
+					</li> -->
+					
+					<!-- 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="#!" class="full-width btn-subMenu">
@@ -183,9 +196,9 @@
 										OPCIONES
 									</div>
 								</a>
-							</li>
+							</li> 
 						</ul>
-					</li>
+					</li>-->
 				</ul>
 			</nav>
 		</div>

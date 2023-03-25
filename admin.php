@@ -3,7 +3,6 @@ session_start(); //se crea una sesion o reanuda la actual basada en un identific
 require_once ('conexion.php'); //conexion a la base de datos
 
 //variables de sesion
-$id = isset($_POST['id'])? $_POST['id']:''; 
 $name = isset($_POST['name'])? $_POST['name']:''; 
 $lastname = isset($_POST['lastname'])? $_POST['lastname']:''; 
 $username = isset($_POST['username'])? $_POST['username']:''; 
@@ -12,25 +11,24 @@ $message = '';
 
 //ingresar datos
 if ($username && $password) {
-	$records = $conn->prepare('INSERT INTO users VALUES ($id, $name, $lastname, $username, $password)');
-	//$records->bindParam(':username', $username);
-	$records->execute();
-	
-	//verificar el password
-	if ($results && password_verify($password, $results['password'])) {
-		$_SESSION['id'] = $results['id'];
-		$_SESSION['user'] = [
-			'id' => $results['id'],
-			'name' => $results['name'],
-			'lastname' => $results['lastname'],
-			'username' => $results['username']
-		];
-		//mensaje
-		$message = 'Successfully logged';
-		header('location: /home.php');
-	} else {
-		$message = 'Los datos ingresados no son correctos';
-	}
+	$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (:name, :lastname, :username, :password)');
+	$query->bindParam(':name', $name, PDO::PARAM_STR);
+	$query->bindParam(':lastname', $lastname, PDO::PARAM_STR);
+	$query->bindParam(':username', $username, PDO::PARAM_STR);
+	$query->bindParam(':password', $password, PDO::PARAM_STR);
+	$query->execute();
+
+	// manera corta de usar bindparam
+	//$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (?, ?, ?, ?)');
+	//$query->execute([$name,$lastname,$username,$password]);
+
+	//verificar datos
+	if ($query === TRUE) {		
+			echo  'Usuario registrado';
+			header('location: /admin.php');
+		} else {
+			$message = 'Los datos ingresados no son correctos';
+		}
 }
 ?>
 
@@ -39,7 +37,7 @@ if ($username && $password) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Administrators</title>
+	<title>Administradores</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
@@ -89,15 +87,10 @@ if ($username && $password) {
 								Nuevo Usuario
 							</div>
 							<div class="full-width panel-content">
-								<form form action="admin.php">
+								<form action="admin.php" method="POST">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Datos de usuario</h5>
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input name="id" class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="DNIAdmin">
-												<label class="mdl-textfield__label" for="DNIAdmin">ID</label>
-												<span class="mdl-textfield__error">Número ID inválido</span>
-											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 												<input name="name" class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="NameAdmin">
 												<label class="mdl-textfield__label" for="NameAdmin">Nombre</label>
@@ -128,34 +121,34 @@ if ($username && $password) {
 												<label class="mdl-textfield__label" for="passwordAdmin">Contraseña</label>
 												<span class="mdl-textfield__error">Contraseña inválida</span>
 											</div>
-											<h5 class="text-condensedLight">Selecciona tu avatar</h5>
+											<h5 class="text-condensedLight">Selecciona tu imagen de Perfil</h5>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
 												<input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
 												<img src="assets/img/avatar-male.png" alt="avatar" style="height: 45px; width="45px;" ">
-												<span class="mdl-radio__label">Avatar 1</span>
+												<span class="mdl-radio__label">Perfil 1</span>
 											</label>
 											<br><br>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
 												<input type="radio" id="option-2" class="mdl-radio__button" name="options" value="avatar-female.png">
 												<img src="assets/img/avatar-female.png" alt="avatar" style="height: 45px; width="45px;" ">
-												<span class="mdl-radio__label">Avatar 2</span>
+												<span class="mdl-radio__label">Perfil 2</span>
 											</label>
 											<br><br>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
 												<input type="radio" id="option-3" class="mdl-radio__button" name="options" value="avatar-male2.png">
 												<img src="assets/img/avatar-male2.png" alt="avatar" style="height: 45px; width="45px;" ">
-												<span class="mdl-radio__label">Avatar 3</span>
+												<span class="mdl-radio__label">Perfil 3</span>
 											</label>
 											<br><br>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
 												<input type="radio" id="option-4" class="mdl-radio__button" name="options" value="avatar-female2.png">
 												<img src="assets/img/avatar-female2.png" alt="avatar" style="height: 45px; width="45px;" ">
-												<span class="mdl-radio__label">Avatar 4</span>
+												<span class="mdl-radio__label">Perfil 4</span>
 											</label>
 										</div>
 									</div>
 									<p class="text-center">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addAdmin">
+										<button type="submit" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored bg-primary" id="btn-addAdmin">
 											<i class="zmdi zmdi-plus"></i>
 										</button>
 										<div class="mdl-tooltip" for="btn-addAdmin">Crear usuario</div>
@@ -166,6 +159,12 @@ if ($username && $password) {
 					</div>
 				</div>
 			</div>
+			<!-- ===== LISTA DE USUARIOS ===== -->
+<?php
+//$querylist = ('SELECT id, name, lastname, username, password FROM users');
+//$result = $conn->query($querylist);
+
+?>
 			<div class="mdl-tabs__panel" id="tabListAdmin">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
@@ -174,7 +173,7 @@ if ($username && $password) {
 								Lista de usuarios
 							</div>
 							<div class="full-width panel-content">
-								<form action="#">
+								<form action="#" method='POST'>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="searchAdmin">
 											<i class="zmdi zmdi-search"></i>
@@ -189,7 +188,7 @@ if ($username && $password) {
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>1. Administrator name</span>
+											<span>1. Administrator name </span>
 											<span class="mdl-list__item-sub-title">DNI</span>
 										</span>
 										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>

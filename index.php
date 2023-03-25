@@ -1,4 +1,9 @@
 <?php
+/*
+exit(
+	password_hash("password", PASSWORD_BCRYPT)
+);
+*/
 session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
 require_once ('conexion.php'); //conexion a la base de datos
 
@@ -29,6 +34,7 @@ if ($username && $password) {
 		$message = 'Los datos ingresados no son correctos';
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

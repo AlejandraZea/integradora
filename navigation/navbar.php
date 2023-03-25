@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!-- barra superior de notificaciones  -->
 	<!-- logout navbar -->
 	<div class="full-width navBar">
@@ -10,7 +13,7 @@
 						<i class="zmdi zmdi-power"></i>
 						<div class="mdl-tooltip" for="btn-exit">Salir</div>
 					</li>
-					<li class="text-condensedLight noLink" ><small>NOMBRE DE USUARIO</small></li>
+					<li class="text-condensedLight noLink" ><small><?php echo $_SESSION['user']['name'] . " " . $_SESSION['user']['lastname']; ?></small></li>
 					<li class="noLink">
 						<figure>
 							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
