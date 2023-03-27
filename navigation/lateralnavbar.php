@@ -69,6 +69,7 @@ session_start();
 								</a>
 							</li>                 -->
 								
+							<!--
 							<li class="full-width">
 								<a href="payments.php" class="full-width">
 									<div class="navLateral-body-cl">
@@ -78,7 +79,9 @@ session_start();
 										PAGOS
 									</div>
 								</a>
-							</li>
+							</li> end pagos--> 
+
+							
 							<li class="full-width">
 								<a href="categories.php" class="full-width">
 									<div class="navLateral-body-cl">

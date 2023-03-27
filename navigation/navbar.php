@@ -1,5 +1,5 @@
 <?php 
-session_start();
+session_start();//iniciar sesion
 ?>
 <!-- barra superior de notificaciones  -->
 	<!-- logout navbar -->

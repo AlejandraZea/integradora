@@ -1,7 +1,7 @@
 <?php
 /*
 exit(
-	password_hash("password", PASSWORD_BCRYPT)
+	password_hash("password", PASSWORD_BCRYPT) // para encriptar las contraseñas
 );
 */
 session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador

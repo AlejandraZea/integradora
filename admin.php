@@ -11,12 +11,14 @@ $message = '';
 
 //ingresar datos
 if ($username && $password) {
+	$password =	password_hash($password, PASSWORD_BCRYPT);//enctriptar la contraseña del usuario
 	$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (:name, :lastname, :username, :password)');
 	$query->bindParam(':name', $name, PDO::PARAM_STR);
 	$query->bindParam(':lastname', $lastname, PDO::PARAM_STR);
 	$query->bindParam(':username', $username, PDO::PARAM_STR);
 	$query->bindParam(':password', $password, PDO::PARAM_STR);
 	$query->execute();
+
 
 	// manera corta de usar bindparam
 	//$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (?, ?, ?, ?)');
@@ -44,6 +46,7 @@ if ($username && $password) {
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="icon" type="image/png" href="/assets/img/favicon.store3.png"/>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
@@ -70,16 +73,16 @@ if ($username && $password) {
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Bienvenido
+					Ingresa nuevos usuarios
 				</p>
 			</div>
 		</section>
 		<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 			<div class="mdl-tabs__tab-bar">
-				<a href="#tabNewAdmin" class="mdl-tabs__tab is-active">CREAR USUARIO</a>
-				<a href="#tabListAdmin" class="mdl-tabs__tab">LISTA DE USUARIOS</a>
+				<a href="#tabListAdmin" class="mdl-tabs__tab is-active">LISTA DE USUARIOS</a>
+				<a href="#tabNewAdmin" class="mdl-tabs__tab">CREAR USUARIO</a>
 			</div>
-			<div class="mdl-tabs__panel is-active" id="tabNewAdmin">
+			<div class="mdl-tabs__panel" id="tabNewAdmin">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
@@ -159,13 +162,14 @@ if ($username && $password) {
 					</div>
 				</div>
 			</div>
-			<!-- ===== LISTA DE USUARIOS ===== -->
-<?php
-//$querylist = ('SELECT id, name, lastname, username, password FROM users');
-//$result = $conn->query($querylist);
 
-?>
-			<div class="mdl-tabs__panel" id="tabListAdmin">
+			<!-- ===== LISTA DE USUARIOS ===== -->
+			<?php
+				$querylist = 'SELECT id, name, lastname, username FROM users';
+				$stm = $conn->query($querylist);
+				$rows = $stm->fetchAll();
+			?>
+			<div class="mdl-tabs__panel is-active" id="tabListAdmin">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--8-col-desktop mdl-cell--2-offset-desktop">
 						<div class="full-width panel mdl-shadow--2dp">
@@ -173,7 +177,8 @@ if ($username && $password) {
 								Lista de usuarios
 							</div>
 							<div class="full-width panel-content">
-								<form action="#" method='POST'>
+								<!-- ===== BUSCADOR DE USUARIOS ===== -->
+								<form action="admin.php" method='GET'> 
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 										<label class="mdl-button mdl-js-button mdl-button--icon" for="searchAdmin">
 											<i class="zmdi zmdi-search"></i>
@@ -183,52 +188,25 @@ if ($username && $password) {
 											<label class="mdl-textfield__label"></label>
 										</div>
 									</div>
-								</form>
-								<div class="mdl-list">
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>1. Administrator name </span>
-											<span class="mdl-list__item-sub-title">DNI</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>2. Administrator name</span>
-											<span class="mdl-list__item-sub-title">DNI</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>3. Administrator name</span>
-											<span class="mdl-list__item-sub-title">DNI</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>4. Administrator name</span>
-											<span class="mdl-list__item-sub-title">DNI</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
-									<li class="full-width divider-menu-h"></li>
-									<div class="mdl-list__item mdl-list__item--two-line">
-										<span class="mdl-list__item-primary-content">
-											<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
-											<span>5. Administrator name</span>
-											<span class="mdl-list__item-sub-title">DNI</span>
-										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
-									</div>
+								</form><!-- end form -->
+
+								<div class="mdl-list"><!-- contenedor de la lista -->
+									<?php
+									if(count($rows) == 0){
+										echo "No hay resultados";
+									}
+									?>
+									<?php foreach ($rows as $row): ?>							
+										<div class="mdl-list__item mdl-list__item--two-line">
+											<span class="mdl-list__item-primary-content">
+												<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
+												<span><?php echo $row['name'].' '.$row['lastname']; ?></span>
+												<span class="mdl-list__item-sub-title"><?php echo $row['username']; ?></span>
+											</span>
+											<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a><!-- ancla -->
+										</div>
+										<li class="full-width divider-menu-h"></li>
+									<?php endforeach; ?>
 								</div>
 							</div>
 						</div>
