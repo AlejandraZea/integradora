@@ -155,7 +155,6 @@ session_start();
 						</a>
 					</li> -->
 
-
 					<!-- seccion de inventarios -->
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">

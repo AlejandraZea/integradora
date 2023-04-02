@@ -56,7 +56,7 @@ if ($barcode && $name && $stock && $price) {
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Cantidad en inventario de cada producto y su precio
+					Inventario en Tienda
 				</p>
 			</div>
 		</section>
@@ -76,7 +76,7 @@ if ($barcode && $name && $stock && $price) {
 							<th class="mdl-data-table__cell--non-numeric">Nombre</th>
 							<th>Barcode</th>
 							<th>Categoría</th>
-							<th>Stock</th>
+							<th>Existencias</th>
 							<th>Precio</th>
 							<th>Options</th>
 						</tr>

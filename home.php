@@ -9,7 +9,6 @@
 	$stm = $conn->query($qry);
 	$counts = $stm->fetchAll();	
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

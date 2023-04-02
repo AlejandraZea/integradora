@@ -209,7 +209,7 @@ if ($barcode && $name && $stock && $price) {
 								</div>
 								<div class="mdl-card__actions mdl-card--border">
 									<?php echo $row['name']; ?>
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="menumore">
 										<i class="zmdi zmdi-more"></i>
 									</button>
 								</div>							
