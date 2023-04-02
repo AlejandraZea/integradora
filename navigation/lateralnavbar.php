@@ -7,7 +7,7 @@ session_start();
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body">
 			<div class="full-width navLateral-body-logo text-center tittles">
-				<i class="zmdi zmdi-close btn-menu"></i> Punto de Venta 
+				<i class="zmdi zmdi-close btn-menu"></i> Control Interno
 			</div>
 			<figure class="full-width" style="height: 77px;">
 				<div class="navLateral-body-cl">
@@ -56,7 +56,7 @@ session_start();
 										COMPAÑÍA
 									</div>
 								</a>
-							</li>
+							</li>-->
 
 							<li class="full-width">
 								<a href="providers.php" class="full-width">
@@ -67,9 +67,9 @@ session_start();
 										PROVEEDORES
 									</div>
 								</a>
-							</li>                 -->
+							</li>                 
 								
-							<!--
+							<!--seccion de  pagos
 							<li class="full-width">
 								<a href="payments.php" class="full-width">
 									<div class="navLateral-body-cl">
@@ -79,7 +79,7 @@ session_start();
 										PAGOS
 									</div>
 								</a>
-							</li> end pagos--> 
+							</li> --> 
 
 							
 							<li class="full-width">
@@ -116,7 +116,9 @@ session_start();
 									</div>
 								</a>
 							</li>
-						<!--	<li class="full-width">
+
+						<!-- seccion de clientes 
+							<li class="full-width">
 								<a href="client.php" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-accounts"></i>
@@ -128,6 +130,7 @@ session_start();
 							</li> -->
 						</ul>
 					</li>
+
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="products.php" class="full-width">
@@ -139,8 +142,7 @@ session_start();
 							</div>
 						</a>
 					</li>
-
-					<!-- 
+					<!-- seccion de ventas 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="sales.php" class="full-width">
@@ -154,7 +156,7 @@ session_start();
 					</li> -->
 
 
-					<!-- 
+					<!-- seccion de inventarios -->
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="inventory.php" class="full-width">
@@ -165,7 +167,7 @@ session_start();
 								INVENTARIOS
 							</div>
 						</a>
-					</li> -->
+					</li> 
 					
 					<!-- 
 					<li class="full-width divider-menu-h"></li>

@@ -39,14 +39,14 @@ if ($username && $password) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Administradores</title>
+	<title>Usuarios</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="icon" type="image/png" href="/assets/img/favicon.store3.png"/>
+	<link rel="icon" type="image/png" href="/assets/img/favicon.store2.png"/>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
@@ -203,7 +203,8 @@ if ($username && $password) {
 												<span><?php echo $row['name'].' '.$row['lastname']; ?></span>
 												<span class="mdl-list__item-sub-title"><?php echo $row['username']; ?></span>
 											</span>
-											<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a><!-- ancla -->
+										<a href="edit_users.php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
+										<a href="delete_users.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a><!-- ancla -->
 										</div>
 										<li class="full-width divider-menu-h"></li>
 									<?php endforeach; ?>

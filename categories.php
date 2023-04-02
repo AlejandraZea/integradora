@@ -35,7 +35,7 @@ if ($name && $description) {
 	<link rel="stylesheet" href="css/material-design-iconic-font.min.css">
 	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="icon" type="image/png" href="/assets/img/favicon.store3.png"/>
+	<link rel="icon" type="image/png" href="/assets/img/favicon.store2.png"/>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
 	<script src="js/material.min.js" ></script>
@@ -78,6 +78,7 @@ if ($name && $description) {
 								Nueva categoría
 							</div>
 							<div class="full-width panel-content">
+								<!-- formulario -->
 								<form action='categories.php' method='POST'>
 									<h5 class="text-condensedLight">Información de categoría</h5>
 									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -142,7 +143,8 @@ if ($name && $description) {
 											<span><?php echo $row['name'];?></span>
 											<span class="mdl-list__item-sub-title"><?php echo $row['description']; ?></span>
 										</span>
-										<a class="mdl-list__item-secondary-action" href="#!"><i class="zmdi zmdi-more"></i></a>
+										<a href="edit_categories-php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
+										<a href="delete_categories.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
 									<?php endforeach; ?>

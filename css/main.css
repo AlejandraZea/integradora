@@ -71,7 +71,7 @@ html, body{
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-color: #fff;
-	background-image: url(../assets/img/fondo.jpg);
+	background-image: url(../assets/img/frame_purple2.jpg);
 }
 .mdl-list__item-avatar{
 	line-height: 40px;
@@ -251,7 +251,7 @@ html, body{
     background-color: #2e6da4 !important;
 }
 .bg-success {
-    background-color: #3f903f !important;
+    background-color: #753f90 !important;
 }
 .bg-danger {
     background-color: #d9534f !important;
