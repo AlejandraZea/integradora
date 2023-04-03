@@ -29,11 +29,11 @@
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-				<i class="zmdi zmdi-shopping-cart"></i>
+				<img src="/assets/img/logo.store.png" alt="logo" width="250px">
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde aut nulla accusantium minus corporis accusamus fuga harum natus molestias necessitatibus.
+					Reporte de ventas
 				</p>
 			</div>
 		</section>
@@ -44,40 +44,17 @@
 					<thead>
 						<tr>
 							<th class="mdl-data-table__cell--non-numeric">Date</th>
-							<th>Client</th>
-							<th>Payment</th>
+							<th>No. Ticket</th>
+							<th>Tipo de Pago</th>
 							<th>Total</th>
-							<th>Options</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-							<td>Client name</td>
-							<td>Credit</td>
+							<td>numero de ticket</td>
+							<td>Tarjeta - Efectivo</td>
 							<td>$77</td>
-							<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-							<td>Client name</td>
-							<td>Credit</td>
-							<td>$77</td>
-							<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-							<td>Client name</td>
-							<td>Credit</td>
-							<td>$77</td>
-							<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
-						</tr>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-							<td>Client name</td>
-							<td>Credit</td>
-							<td>$77</td>
-							<td><button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"><i class="zmdi zmdi-more"></i></button></td>
 						</tr>
 					</tbody>
 				</table>

@@ -58,7 +58,7 @@ if ($name && $address) {
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-				<i class="zmdi zmdi-truck"></i>
+				<img src="/assets/img/logo.store.png" alt="logo" width="250px">
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">

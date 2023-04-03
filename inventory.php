@@ -52,10 +52,10 @@ if ($barcode && $name && $stock && $price) {
 	<section class="full-width pageContent">
 		<section class="full-width header-well">
 			<div class="full-width header-well-icon">
-				<i class="zmdi zmdi-store"></i>
+				<img src="/assets/img/logo.store.png" alt="logo" width="250px">
 			</div>
-			<div class="full-width header-well-text">
-				<p class="text-condensedLight">
+			<div class="full-width header-well-text">				
+				<p class="text-condensedLight">					
 					Inventario en Tienda
 				</p>
 			</div>

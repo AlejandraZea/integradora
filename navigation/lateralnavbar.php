@@ -1,7 +1,6 @@
 <?php 
 session_start();
 ?>
-
 <!-- navLateral.php -->
 <section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
@@ -35,6 +34,34 @@ session_start();
 							</div>
 						</a>
 					</li>
+					<!-- seccion de tickets -->
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a href="tickets.php" class="full-width">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-shopping-basket"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								TICKETS
+							</div>
+						</a>
+					</li> 
+					
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a href="admin.php" class="full-width ">
+							<div class="navLateral-body-cl">
+								<i class="zmdi zmdi-face"></i>
+							</div>
+							<div class="navLateral-body-cr hide-on-tablet">
+								USUARIOS
+							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
+						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+						</ul>
+					</li>
+
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="#!" class="full-width btn-subMenu">
@@ -47,17 +74,7 @@ session_start();
 							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
 						<ul class="full-width menu-principal sub-menu-options">
-						<!--		<li class="full-width">
-								<a href="company.php" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-balance"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										COMPAÑÍA
-									</div>
-								</a>
-							</li>-->
-
+						
 							<li class="full-width">
 								<a href="providers.php" class="full-width">
 									<div class="navLateral-body-cl">
@@ -67,21 +84,8 @@ session_start();
 										PROVEEDORES
 									</div>
 								</a>
-							</li>                 
-								
-							<!--seccion de  pagos
-							<li class="full-width">
-								<a href="payments.php" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-card"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										PAGOS
-									</div>
-								</a>
-							</li> --> 
+							</li>       
 
-							
 							<li class="full-width">
 								<a href="categories.php" class="full-width">
 									<div class="navLateral-body-cl">
@@ -94,42 +98,9 @@ session_start();
 							</li>
 						</ul>
 					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-face"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								USUARIOS
-							</div>
-							<span class="zmdi zmdi-chevron-left"></span>
-						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="admin.php" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-account"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										ADMINISTRADORES
-									</div>
-								</a>
-							</li>
 
-						<!-- seccion de clientes 
-							<li class="full-width">
-								<a href="client.php" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-accounts"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										CLIENTES
-									</div>
-								</a>
-							</li> -->
-						</ul>
-					</li>
+
+					
 
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
@@ -142,7 +113,7 @@ session_start();
 							</div>
 						</a>
 					</li>
-					<!-- seccion de ventas 
+					<!-- seccion de ventas -->
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
 						<a href="sales.php" class="full-width">
@@ -153,7 +124,7 @@ session_start();
 								VENTAS
 							</div>
 						</a>
-					</li> -->
+					</li> 
 
 					<!-- seccion de inventarios -->
 					<li class="full-width divider-menu-h"></li>
@@ -167,42 +138,6 @@ session_start();
 							</div>
 						</a>
 					</li> 
-					
-					<!-- 
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-wrench"></i>
-							</div>
-							<div class="navLateral-body-cr hide-on-tablet">
-								AJUSTES
-							</div>
-							<span class="zmdi zmdi-chevron-left"></span>
-						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPCIONES
-									</div>
-								</a>
-							</li>
-							<li class="full-width">
-								<a href="#!" class="full-width">
-									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
-									</div>
-									<div class="navLateral-body-cr hide-on-tablet">
-										OPCIONES
-									</div>
-								</a>
-							</li> 
-						</ul>
-					</li>-->
 				</ul>
 			</nav>
 		</div>

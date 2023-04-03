@@ -39,6 +39,7 @@
 	<!-- pageContent -->
 	<section class="full-width pageContent">
 		<section class="full-width text-center" style="padding: 40px 0;">
+			<img src="/assets/img/logo.store.png" alt="logo" width="250px">
 			<h3 class="text-center tittles">REGISTROS</h3>
 			<!-- TITULOS -->
 
