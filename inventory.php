@@ -89,8 +89,19 @@ if ($barcode && $name && $stock && $price) {
 								<td><?php echo $row['category']; ?></td>
 								<td><?php echo $row['stock']; ?></td>
 								<td><?php echo $row['price']; ?></td>
-								<td><a href="edit_products.php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
-								<a href="delete_products.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a></td>							</tr>
+								<td>
+									<!-- boton para agregar producto -->
+									<a href="add_product.php">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+											<i class="material-icons">-</i>
+										</button></a>
+									<!-- boton para eliminar producto -->
+									<a href="delete_products.php">
+										<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+											<i class="material-icons">+</i>
+										</button></a>								
+								</td>			
+							</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>

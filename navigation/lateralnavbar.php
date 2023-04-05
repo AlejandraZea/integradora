@@ -10,12 +10,19 @@ session_start();
 			</div>
 			<figure class="full-width" style="height: 77px;">
 				<div class="navLateral-body-cl">
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+				<?php
+					if(empty($_SESSION['user']['avatar'])){
+						echo '<i class="zmdi zmdi-account mdl-list__item-avatar"></i>';
+
+					}else{
+						echo '<img src="/assets/img/'. $_SESSION['user']['avatar'] .'" width="50px">';
+					}
+				?>
 				</div>
 				<figcaption class="navLateral-body-cr hide-on-tablet">
 					<span>
 						<?php echo $_SESSION['user']['name'] . " " . $_SESSION['user']['lastname']; ?> <br>
-						<small>Admin</small>
+						<small><?php echo $_SESSION['user']['role_id']; ?></small>
 					</span>
 				</figcaption>
 			</figure>

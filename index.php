@@ -13,7 +13,7 @@ $password = isset($_POST['pass'])? $_POST['pass']:'';
 $message = '';
 //si contiene usuario y contraseña 
 if ($username && $password) {
-	$records = $conn->prepare('SELECT id, name, lastname, username, password FROM users where username=:username LIMIT 1');
+	$records = $conn->prepare('SELECT id, name, lastname, username, password, avatar, role_id FROM users where username=:username LIMIT 1');
 	$records->bindParam(':username', $username);
 	$records->execute();
 	$results = $records->fetch(PDO::FETCH_ASSOC);
@@ -25,7 +25,9 @@ if ($username && $password) {
 			'id' => $results['id'],
 			'name' => $results['name'],
 			'lastname' => $results['lastname'],
-			'username' => $results['username']
+			'username' => $results['username'],
+			'role_id' => $results['role_id'],
+			'avatar' => $results['avatar']
 		];
 		//mensaje
 		$message = 'Successfully logged';
