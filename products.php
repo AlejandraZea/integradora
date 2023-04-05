@@ -141,10 +141,10 @@ if ($barcode && $name && $stock && $price) {
 													<?php endforeach; ?>
 												</select>
 											</div>										
-											<!-- subir imagen del producto
+											<!-- subir imagen del producto -->
 											<div class="mdl-textfield mdl-js-textfield">
 												<input type="file" name='picture'>
-											</div> -->
+											</div> 
 										</div>
 									</div>
 									<p class="text-center">
