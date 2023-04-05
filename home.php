@@ -58,21 +58,13 @@
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						71<br>
-						<small>Clientes</small>
-					</span>
-				</div>
-				<i class="zmdi zmdi-accounts tile-icon"></i>
-			</article>
-			<article class="full-width tile">
-				<div class="tile-text">
-					<span class="text-condensedLight">
 						7<br>
 						<small>Proveedores</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-truck tile-icon"></i>
 			</article>
+
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
@@ -82,6 +74,7 @@
 				</div>
 				<i class="zmdi zmdi-label tile-icon"></i>
 			</article>
+
 			<article class="full-width tile">
 				<div class="tile-text">
 					<span class="text-condensedLight">
@@ -100,6 +93,19 @@
 				</div>
 				<i class="zmdi zmdi-shopping-cart tile-icon"></i>
 			</article>
+			
+			<article class="full-width tile">
+				<a href="inventory.php">
+					<div class="tile-text">
+						<span class="text-condensedLight">
+							71<br>
+							<small>inventarios</small>
+						</span>
+					</div>
+					<i class="zmdi zmdi-accounts tile-icon"></i>
+				</a>
+			</article>
+
 		</section>
 	</section>
 </body>
