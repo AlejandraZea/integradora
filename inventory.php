@@ -91,12 +91,12 @@ if ($barcode && $name && $stock && $price) {
 								<td><?php echo $row['price']; ?></td>
 								<td>
 									<!-- boton para agregar producto -->
-									<a href="add_product.php">
+									<a href="delete_product.php?id=<?php echo $row['id']; ?>">
 										<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
 											<i class="material-icons">-</i>
 										</button></a>
 									<!-- boton para eliminar producto -->
-									<a href="delete_products.php">
+									<a href="add_product.php?id=<?php echo $row['id']; ?>">
 										<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
 											<i class="material-icons">+</i>
 										</button></a>								

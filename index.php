@@ -67,9 +67,9 @@ if ($username && $password) {
 		<p class="text-center text-condensedLight">Ingresa con tu cuenta</p>
 
 
-	<?php if(!empty($message)): ?>
-		<p><?php echo $message ?></p>
-	<?php endif; ?>
+		<?php if(!empty($message)): ?>
+			<p><?php echo $message ?></p>
+		<?php endif; ?>
 
 		<form action="index.php" method="post">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

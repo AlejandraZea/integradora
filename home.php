@@ -2,7 +2,7 @@
 	session_start();//iniciar sesion
 	require_once('conexion.php'); // conexion a la base de datos
 	//variables
-	$id = isseT($_GET['id']) ? $_GET['id']: '' ;
+	$id = isset($_GET['id']) ? $_GET['id']: '' ;
 	$message= '';
 
 	$qry= 'SELECT COUNT(id) FROM users';
@@ -47,8 +47,8 @@
 			<article class="full-width tile">
 				<a href="admin.php"><div class="tile-text">
 					<span class="text-condensedLight">
-						<?php echo $id; ?> <br>
-						<small>USUARIOS</small>
+						<?php echo [$counts]; ?> <br>
+					<small>USUARIOS</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-account tile-icon"></i>

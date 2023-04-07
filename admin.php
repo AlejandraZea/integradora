@@ -21,11 +21,6 @@ if ($username && $password) {
 	$query->bindParam(':avatar', $avatar, PDO::PARAM_STR);
 	$query->execute();
 
-
-	// manera corta de usar bindparam
-	//$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (?, ?, ?, ?)');
-	//$query->execute([$name,$lastname,$username,$password]);
-
 	//verificar datos
 	if ($query === TRUE) {		
 			echo  'Usuario registrado';
@@ -209,22 +204,23 @@ if ($username && $password) {
 									?>
 									<?php foreach ($rows as $row): ?>							
 										<div class="mdl-list__item mdl-list__item--two-line">
-											<span class="mdl-list__item-primary-content">
-												<span>
-													<?php
-														if(empty($row['avatar'])){
-															echo '<i class="zmdi zmdi-account mdl-list__item-avatar"></i>';
+											<span>
+												<?php
+													if(empty($row['avatar'])){
+														echo '<i class="zmdi zmdi-account mdl-list__item-avatar"></i>';
 
-														}else{
-															echo '<img src="/assets/img/'. $row['avatar'] .'" width="50px">';
-														}
-													?>
-												</span>
+													}else{
+														echo '<img src="/assets/img/'. $row['avatar'] .'" width="50px">';
+													}
+												?>
+											</span>
+											<span class="mdl-list__item-primary-content">
+												
 												<span><?php echo $row['name'].' '.$row['lastname']; ?></span>
 												<span class="mdl-list__item-sub-title"><?php echo $row['username']; ?></span>
 											</span>
-										<a href="edit_users.php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
-										<a href="delete_users.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a><!-- ancla -->
+										<a href="edit_users.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
+										<a href="delete_users.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
 										</div>
 										<li class="full-width divider-menu-h"></li>
 									<?php endforeach; ?>
