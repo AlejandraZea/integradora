@@ -102,12 +102,19 @@ $row = $query->fetch();
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Detalles de cuenta de usuario</h5>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input  name="username" class="mdl-textfield__input" type="text" pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" id="UserNameAdmin" value="<?php echo $row["username"]; ?>">
+												<input  name="username"
+												class="mdl-textfield__input" 
+												type="text" 
+												pattern="-?[A-Za-z0-9áéíóúÁÉÍÓÚ]*(\.[0-9]+)?" 
+												id="UserNameAdmin" 
+												value="<?php echo $row["username"]; ?>">
 												<label class="mdl-textfield__label" for="UserNameAdmin">Nombre de usuario</label>
 												<span class="mdl-textfield__error">Nombre de usuario inválido</span>
 											</div>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input  type="password" name="password" class="mdl-textfield__input" />
+												<input name="password" 
+												type="password" 
+												 class="mdl-textfield__input" />
 												<label class="mdl-textfield__label" for="passwordAdmin">Contraseña</label>
 												<span class="mdl-textfield__error">Contraseña inválida</span>
 											</div>

@@ -143,8 +143,8 @@ if ($name && $description) {
 											<span><?php echo $row['name'];?></span>
 											<span class="mdl-list__item-sub-title"><?php echo $row['description']; ?></span>
 										</span>
-										<a href="edit_categories-php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
-										<a href="delete_categories.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
+										<a href="edit_categories.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
+										<a href="delete_categories.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
 									</div>
 									<li class="full-width divider-menu-h"></li>
 									<?php endforeach; ?>

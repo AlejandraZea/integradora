@@ -172,7 +172,9 @@ if ($barcode && $name && $stock && $price) {
 					</div>
 				</div>
 			</div>
-			<!-- LISTA DE PRODUCTOS -->
+			<!-- ===========================
+					LISTA DE PRODUCTOS 
+				 =========================== -->
 			<div class="mdl-tabs__panel is-active" id="tabListProducts">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
@@ -214,7 +216,7 @@ if ($barcode && $name && $stock && $price) {
 							<?php foreach($rows as $row): ?>
 							<div class="mdl-card mdl-shadow--2dp full-width product-card">							
 								<div class="mdl-card__title">
-								<?php echo '<img src="/assets/img/products_pictures/'. $row['picture'] .'" alt="product" class="img-responsive">';	?>										
+								<?php echo '<img src="/assets/img/products_pictures/'. $row['picture'] .'" alt="product"  class="img-responsive">';	?>										
 
 									<!-- <img src="assets/img/frame_purple.jpg" alt="product" class="img-responsive"> -->
 								</div>
@@ -223,10 +225,7 @@ if ($barcode && $name && $stock && $price) {
 									<small><?php echo $row['category']; ?></small>
 								</div>
 								<div class="mdl-card__actions mdl-card--border">
-									<?php echo $row['name']; ?>
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="menumore">
-										<i class="zmdi zmdi-more"></i>
-									</button>
+									<?php echo $row['name']; ?>									
 								</div>							
 							</div>
 							<?php endforeach; ?> 						
