@@ -84,23 +84,20 @@ if ($barcode && $name && $stock && $price) {
 					<tbody><!-- cuerpo de la tabla -->
 						<?php foreach($rows as $row): ?>
 							<tr>
-								<td class="mdl-data-table__cell--non-numeric"><?php echo $row['name']; ?></td>
-								<td><?php echo $row['barcode']; ?></td>
-								<td><?php echo $row['category']; ?></td>
-								<td><?php echo $row['stock']; ?></td>
-								<td><?php echo $row['price']; ?></td>
-								<td>
-									<!-- boton para agregar producto -->
-									<a href="delete_product.php?id=<?php echo $row['id']; ?>">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
-											<i class="material-icons">-</i>
-										</button></a>
-									<!-- boton para eliminar producto -->
-									<a href="add_product.php?id=<?php echo $row['id']; ?>">
-										<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-											<i class="material-icons">+</i>
-										</button></a>								
-								</td>			
+								<form action="update_stock.php" method="POST">
+									<input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+									<td class="mdl-data-table__cell--non-numeric"><?php echo $row['name']; ?></td>
+									<td><?php echo $row['barcode']; ?></td>
+									<td><?php echo $row['category']; ?></td>
+									<td><input type="number" name="stock" min="0" style="width: 80px;" value="<?php echo $row['stock']; ?>"></td>
+									<td><?php echo $row['price']; ?></td>								
+									<td>
+										<!-- boton para guardar producto -->
+										<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+											Guardar
+										</button>							
+									</td>
+								</form>			
 							</tr>
 						<?php endforeach; ?>
 					</tbody>

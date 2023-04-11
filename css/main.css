@@ -846,15 +846,20 @@ html, body{
 		text-align: right;
 	}
 	/*=====================================================
-					Vistas para el ticket
+					Vistas del ticket
 	======================================================*/
 	.demo-card-square.mdl-card {
-		width: 320px;
-		height: 320px;
+		width: 100%;
+		height: auto;
+		position: relative;
+		
 	  }
 	  .demo-card-square > .mdl-card__title {
-		color: #fff;
+		color: #ffffff;
 		background:
 		  url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+	  }
+	  .mdl-card__actions_tickets{
+		text-align: right;
 	  }
 }
