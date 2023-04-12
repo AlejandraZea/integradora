@@ -50,7 +50,7 @@ require_once ('conexion.php'); //conexion a la base de datos
 					$querylist = 'SELECT id, user_id, date, amount FROM tickets';
 					$stm = $conn->query($querylist);
 					$rows = $stm->fetchAll();
-				?>		
+				?>		`
 					<thead>						
 						<tr>
 							<th class="mdl-data-table__cell--non-numeric">Fecha</th>
