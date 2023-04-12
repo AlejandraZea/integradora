@@ -1,3 +1,8 @@
+<?php
+session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
+require_once ('conexion.php'); //conexion a la base de datos
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,21 +46,28 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-					<thead>
+				<?php
+					$querylist = 'SELECT id, user_id, date, amount FROM tickets';
+					$stm = $conn->query($querylist);
+					$rows = $stm->fetchAll();
+				?>		
+					<thead>						
 						<tr>
-							<th class="mdl-data-table__cell--non-numeric">Date</th>
+							<th class="mdl-data-table__cell--non-numeric">Fecha</th>
 							<th>No. Ticket</th>
 							<th>Tipo de Pago</th>
 							<th>Total</th>
-						</tr>
+						</tr>						
 					</thead>
 					<tbody>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-							<td>numero de ticket</td>
-							<td>Tarjeta - Efectivo</td>
-							<td>$77</td>
-						</tr>
+						<?php foreach ($rows as $row): ?>
+							<tr>
+								<td class="mdl-data-table__cell--non-numeric"><?php echo $row['date']; ?></td>
+								<td><?php echo $row['id']; ?></td>
+								<td><?php echo $row['user_id']; ?></td> <!-- hacer un inner join para mostrar el nombre del usuario -->
+								<td>$ <?php echo $row['amount']; ?></td>
+							</tr>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

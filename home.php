@@ -2,12 +2,9 @@
 	session_start();//iniciar sesion
 	require_once('conexion.php'); // conexion a la base de datos
 	//variables
-	$id = isset($_GET['id']) ? $_GET['id']: '' ;
+	$id = isset($_POST['id']) ? $_GET['id']: '' ;
 	$message= '';
-
-	$qry= 'SELECT COUNT(id) FROM users';
-	$stm = $conn->query($qry);
-	$counts = $stm->fetchAll();	
+	
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -44,10 +41,14 @@
 			<!-- TITULOS -->
 
 			<!-- seccion usuarios -->
+			<?php
+				$stm = $conn->query("SELECT COUNT(id) FROM users");
+				$file= $stm->fetch();	
+			?>
 			<article class="full-width tile">
 				<a href="admin.php"><div class="tile-text">
 					<span class="text-condensedLight">
-						<?php echo [$counts]; ?> <br>
+						<?php echo $file[0]; ?> </br>
 					<small>USUARIOS</small>
 					</span>
 				</div>
@@ -56,11 +57,15 @@
 			</article><!-- end seccion usuarios -->
 
 			<!-- seccion proveedores -->
+			<?php
+				$stm = $conn->query("SELECT COUNT(id) FROM providers");
+				$file = $stm->fetch();	
+			?>
 			<article class="full-width tile">
 				<a href="providers.php">
 					<div class="tile-text">
 						<span class="text-condensedLight">
-							7<br>
+							<?php echo $file[0]; ?> </br>
 							<small>Proveedores</small>
 						</span>
 					</div>
@@ -69,11 +74,15 @@
 			</article><!-- end seccion proveedores -->
 
 			<!-- seccion categorias -->
+			<?php
+				$stm = $conn->query("SELECT COUNT(id) FROM categories");
+				$file = $stm->fetch();	
+			?>
 			<article class="full-width tile">
 				<a href="categories.php">
 					<div class="tile-text">
 						<span class="text-condensedLight">
-							9<br>
+						<?php echo $file[0]; ?> </br>
 							<small>Categorías</small>
 						</span>
 					</div>
@@ -82,11 +91,15 @@
 			</article><!-- end seccion categorias -->
 
 			<!-- seccion productos -->
+			<?php
+				$stm = $conn->query("SELECT COUNT(id) FROM products");
+				$file = $stm->fetch();	
+			?>
 			<article class="full-width tile">
 				<a href="products.php">
 					<div class="tile-text">
 						<span class="text-condensedLight">
-							121<br>
+						<?php echo $file[0]; ?> </br>
 							<small>Productos</small>
 						</span>
 					</div>
@@ -95,23 +108,32 @@
 			</article><!-- end seccion productos -->
 
 			<!-- seccion ventas -->
+			<?php
+				$stm = $conn->query("SELECT COUNT(id) FROM tickets");
+				$file = $stm->fetch();	
+			?>
 			<article class="full-width tile">
 				<a href="sales.php">
 					<div class="tile-text">
 						<span class="text-condensedLight">
-							47<br>
+						<?php echo $file[0]; ?> </br>
 							<small>Ventas</small>
 						</span>
 					</div>
 					<i class="zmdi zmdi-shopping-cart tile-icon"></i>
 				</a>
 			</article><!-- end seccion ventas -->
-
+			
+			<!-- seccion de inventarios -->
+			<?php
+				$stm = $conn->query("SELECT SUM(stock) FROM products");
+				$file = $stm->fetch();	
+			?>
 			<article class="full-width tile">
 				<a href="inventory.php">
 					<div class="tile-text">
 						<span class="text-condensedLight">
-							71<br>
+						<?php echo $file[0]; ?> </br>
 							<small>Inventarios</small>
 						</span>
 					</div>

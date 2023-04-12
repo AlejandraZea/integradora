@@ -248,7 +248,7 @@ html, body{
 }
 /*====== Backgrouns color*/
 .bg-primary {
-    background-color: #2e6da4 !important;
+    background-color: #753f90 !important;
 }
 .bg-success {
     background-color: #753f90 !important;
@@ -276,7 +276,7 @@ html, body{
 }
 /*=============Estilos barra superior*/
 .navBar{
-	background-color: #3F51B5;
+	background-color: #753f90;
 	height: 45px;
 	position: absolute;
 	top: 0;
@@ -393,7 +393,7 @@ html, body{
 	color: #fff;
 	width: 100%;
 	font-size: 25px;
-	background-color: #3F51B5;
+	background-color: #753f90;
 }
 .navLateral-body-logo .zmdi-close{
 	width: 0;
@@ -525,7 +525,7 @@ html, body{
 .tile-text span,
 .tile-icon{
 	position: absolute;
-	color: rgba(0,0,0,.3);
+	color: #753f90;
 	transition: all .3s ease-in-out;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -857,7 +857,7 @@ html, body{
 	  .demo-card-square > .mdl-card__title {
 		color: #ffffff;
 		background:
-		  url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+		  url('../assets/demos/dog.png') bottom right 15% no-repeat #ff4081;
 	  }
 	  .mdl-card__actions_tickets{
 		text-align: right;

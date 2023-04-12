@@ -29,12 +29,19 @@ if ($username && $password) {
 			'role_id' => $results['role_id'],
 			'avatar' => $results['avatar']
 		];
+		/* $_SESSION['id'] = $results['id'];
+		$_SESSION['roles'] =[
+			'id' => $results['id'],
+			'name' => $results['name']
+		];*/
+
 		//mensaje
 		$message = 'Successfully logged';
 		header('location: /home.php');
 	} else {
 		$message = 'Los datos ingresados no son correctos';
 	}
+
 }
 
 ?>
