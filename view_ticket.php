@@ -8,7 +8,7 @@ require_once ('conexion.php'); //conexion a la base de datos
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ventas</title>
+	<title>Detalle de Ticket</title>
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/sweetalert2.css">
 	<link rel="stylesheet" href="css/material.min.css">
@@ -38,50 +38,12 @@ require_once ('conexion.php'); //conexion a la base de datos
 			</div>
 			<div class="full-width header-well-text">
 				<p class="text-condensedLight">
-					Reporte de ventas
+					Detalle de Ticket
 				</p>
 			</div>
 		</section>
 		<div class="full-width divider-menu-h"></div>
-		<div class="mdl-grid">
-			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-				<?php
-					$querylist = 'SELECT tickets.id, tickets.user_id, tickets.date, tickets.amount, users.name AS user 
-									FROM tickets
-									INNER JOIN users ON tickets.user_id = users.id';
-					$stm = $conn->query($querylist);
-					$rows = $stm->fetchAll();
-				?>		
-					<thead>						
-						<tr>
-							<th class="mdl-data-table__cell--non-numeric">No. Ticket</th>
-							<th class="mdl-data-table__cell--non-numeric">Fecha</th>
-							<th class="mdl-data-table__cell--non-numeric">Usuario</th>
-							<th >Total</th>
-						</tr>						
-					</thead>
-					<tbody>
-						<?php foreach ($rows as $row): ?>							
-								<tr>
-										<td class="mdl-data-table__cell--non-numeric"><?php echo $row['id']; ?></td>
-										<td class="mdl-data-table__cell--non-numeric"><?php echo $row['date']; ?></td>										
-										<td class="mdl-data-table__cell--non-numeric"><?php echo $row['user']; ?></td><!-- hacer un inner join para mostrar el nombre del usuario -->
-										<td>$ <?php echo $row['amount']; ?></td>
-										<td>
-											<!-- boton para detalle de ticket -->
-											<a href="view_ticket.php?id=<?php echo $row['id']; ?>">
-												<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-													Ver Ticket
-												</button>
-											</a>
-										</td>
-								</tr>							
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		
 	</section>
 </body>
 </html>
