@@ -13,7 +13,7 @@ $password = isset($_POST['pass'])? $_POST['pass']:'';
 $message = '';
 //si contiene usuario y contraseña 
 if ($username && $password) {
-	$records = $conn->prepare('SELECT id, name, lastname, username, password FROM users where username=:username LIMIT 1');
+	$records = $conn->prepare('SELECT id, name, lastname, username, password, avatar, role_id FROM users where username=:username LIMIT 1');
 	$records->bindParam(':username', $username);
 	$records->execute();
 	$results = $records->fetch(PDO::FETCH_ASSOC);
@@ -25,14 +25,23 @@ if ($username && $password) {
 			'id' => $results['id'],
 			'name' => $results['name'],
 			'lastname' => $results['lastname'],
-			'username' => $results['username']
+			'username' => $results['username'],
+			'role_id' => $results['role_id'],
+			'avatar' => $results['avatar']
 		];
+		/* $_SESSION['id'] = $results['id'];
+		$_SESSION['roles'] =[
+			'id' => $results['id'],
+			'name' => $results['name']
+		];*/
+
 		//mensaje
 		$message = 'Successfully logged';
 		header('location: /home.php');
 	} else {
 		$message = 'Los datos ingresados no son correctos';
 	}
+
 }
 
 ?>
@@ -65,9 +74,9 @@ if ($username && $password) {
 		<p class="text-center text-condensedLight">Ingresa con tu cuenta</p>
 
 
-	<?php if(!empty($message)): ?>
-		<p><?php echo $message ?></p>
-	<?php endif; ?>
+		<?php if(!empty($message)): ?>
+			<p><?php echo $message ?></p>
+		<?php endif; ?>
 
 		<form action="index.php" method="post">
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

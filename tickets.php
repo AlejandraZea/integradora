@@ -2,25 +2,6 @@
 session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
 require_once ('conexion.php'); //conexion a la base de datos
 
-//variables de sesion
-$barcode = $_POST['barcode'] ?? ''; 
-$name = $_POST['name'] ?? '';
-$stock = $_POST['stock'] ?? ''; 
-$price = $_POST['price'] ?? ''; 
-$category_id= $_POST['category_id'] ?? ''; //categorias
-$message = '';
-
-//ingresar datos
-if ($barcode && $name && $stock && $price) {
-	$query = $conn->prepare('INSERT INTO products (barcode, name, stock, price, category_id) VALUES (:barcode, :name, :stock, :price, :category_id)');
-	$query->bindParam(':barcode', $barcode, PDO::PARAM_INT);
-	$query->bindParam(':name', $name, PDO::PARAM_STR);
-	$query->bindParam(':stock', $stock, PDO::PARAM_INT);
-	$query->bindParam(':price', $price, PDO::PARAM_INT);
-	$query->bindParam(':category_id', $category_id, PDO::PARAM_INT);
-	$query->execute();
-
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -73,71 +54,83 @@ if ($barcode && $name && $stock && $price) {
 							<div class="full-width panel-content">
 
 								<div class="mdl-grid">
-									<form action="#">
-										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-											<input class="mdl-textfield__input" type="text" id="sample3">
-											<label class="mdl-textfield__label" for="sample3">CODIGO DE BARRAS</label>
+								<!-- =====================================================
+											FORMULARIO DE CODIGO DE BARRAS
+									 ====================================================== -->
+									<form action="add_product_tickets.php" method="POST">
+										<div class="mdl-textfield mdl-js-textfield">
+											<input type="text" name="barcode" class="mdl-textfield__input"  id="sample2">
+											<label class="mdl-textfield__label" for="sample2">CODIGO DE BARRAS</label>
+										</div>	
+										<div style="text-align: left; padding: 10px" >
+											<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">agregar</button>
 										</div>
-									</form>					
+									</form>	<!-- end form -->				
 								</div>
-									<div class="mdl-grid">
-										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
-									<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-											<thead>
-												<tr>
-												<th class="mdl-data-table__cell--non-numeric">Producto</th>
-												<th>Cantidad</th>
-												<th>Precio</th>
-												<th>Total</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-												<td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-												<td>25</td>
-												<td>$2.90</td>
-												<td>72.5</td>
-												</tr>
-												<tr>
-												<td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
-												<td>25</td>
-												<td>$2.90</td>
-												<td>72.5</td>
-												</tr>
-											</tbody>
-									</table>
-								</div>	
+								<!-- =====================================================
+											FORMULARIO DE VISTA DE TICKET
+									 ====================================================== -->
+									
 								<div class="mdl-grid">										
-									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
+									<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 										<div class="demo-card-square mdl-card mdl-shadow--2dp">										
 											<div class="mdl-card__title mdl-card--expand">												
-												<h2 class="mdl-card__title-text">Ticket No. #</h2>
+												<h2 class="mdl-card__title-text">Ticket de Venta</h2>
 											</div>
-											<div class="mdl-card__supporting-text">
-												<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-													<thead>
-														<tr>
-															<th class="mdl-data-table__cell--non-numeric">producto</th>
-															<th>cantidad</th>
-															<th>precio</th>
-														</tr>
-														<tbody>
-															<td>Pan</td>
-															<td>1</td>
-															<td>32.00</td>
-														</tbody>
-													</thead>
-												</table>
-											</div>
-											<div class="mdl-card__actions mdl-card--border">
-											<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-												Total productos:
-												</a>
-												<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-												Total compra:
-												</a>
-											</div>
-											</div>
+
+											<div class="mdl-card__supporting-text-responsive">
+												<form action="create_ticket.php" method="POST">
+													<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
+															<thead>
+																<tr>
+																<th>#</th>
+																<th class="mdl-data-table__cell--non-numeric">Producto</th>
+																<th>Cantidad</th>
+																<th>Precio</th>
+																<th>Total</th>
+																</tr>
+															</thead>
+															
+															<tbody>															
+																<?php if (count($_SESSION['ticket']) == 0): ?>
+																	<tr>
+																		<td colspan="5" style="text-align: center"><?php echo "Agrega un articulo"; ?></td>
+																	</tr>
+																<?php endif; ?>
+																<!-- iteramos los productos marcados -->
+																<?php 
+																	$total = 0;
+																	$quantity = 0;
+																	foreach($_SESSION['ticket'] as $index => $product): 
+																?>
+																	<tr>
+																	<td><?php echo $index +1; ?></td>
+																	<td class="mdl-data-table__cell--non-numeric"><?php echo $product['name'] ; ?></td>
+																	<td><?php echo $product['quantity']; ?></td>
+																	<td>$ <?php echo $product['price_unit']; ?></td>
+																	<td>$ <?php echo number_format($product['price_unit'] * $product['quantity'],2,'.',','); ?></td>
+																	</tr>
+																<?php 
+																	$total += $product['price_unit'] * $product['quantity'];
+																	$quantity += $product['quantity'];
+																	endforeach; 
+																?>															
+															</tbody>														
+													</table>
+													<div class="mdl-card__actions mdl-card--border mdl-card__actions_tickets">
+														<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+															Total productos: <?php echo $quantity; ?>
+														</a>
+														<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+															Total compra: $ <?php echo number_format($total,2,'.',','); ?>
+														</a>
+													</div>
+													</div>
+													<div style="text-align: right; padding: 10px" >
+														<button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">TERMINAR</button>
+													</div>
+												</form> <!-- end form -->
+											</div>											
 										</div>
 									</div>
 								</div>

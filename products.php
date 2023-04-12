@@ -8,16 +8,29 @@ $name = $_POST['name'] ?? '';
 $stock = $_POST['stock'] ?? ''; 
 $price = $_POST['price'] ?? ''; 
 $category_id= $_POST['category_id'] ?? ''; //categorias
+$picture= '';//subir la imagen a la base de datos
 $message = '';
 
 //ingresar datos
 if ($barcode && $name && $stock && $price) {
-	$query = $conn->prepare('INSERT INTO products (barcode, name, stock, price, category_id) VALUES (:barcode, :name, :stock, :price, :category_id)');
+	//insertar la imagen en un directorio
+	if ($_FILES["picture"]){
+		$base_name = basename($_FILES["picture"]["name"]);
+		$picture = time() . "_" . $base_name;
+		$route = "assets/img/products_pictures/" . $picture;
+		$upload_picture = move_uploaded_file($_FILES['picture']['tmp_name'], $route);
+		if(!$upload_picture){
+			$message ('No se subio la imagen');													
+		}
+	}
+
+	$query = $conn->prepare('INSERT INTO products (barcode, name, stock, price, category_id, picture) VALUES (:barcode, :name, :stock, :price, :category_id, :picture)');
 	$query->bindParam(':barcode', $barcode, PDO::PARAM_INT);
 	$query->bindParam(':name', $name, PDO::PARAM_STR);
 	$query->bindParam(':stock', $stock, PDO::PARAM_INT);
 	$query->bindParam(':price', $price, PDO::PARAM_INT);
 	$query->bindParam(':category_id', $category_id, PDO::PARAM_INT);
+	$query->bindParam(':picture', $picture, PDO::PARAM_STR);
 	$query->execute();
 
 	//verificar datos
@@ -83,7 +96,7 @@ if ($barcode && $name && $stock && $price) {
 							</div>
 							<div class="full-width panel-content">
 								<!-- =====  comienza el formulario ====== -->
-								<form action='products.php' method='POST'>
+								<form action='products.php' method='POST' enctype="multipart/form-data">
 									<div class="mdl-grid">
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Información Básica</h5>
@@ -141,10 +154,10 @@ if ($barcode && $name && $stock && $price) {
 													<?php endforeach; ?>
 												</select>
 											</div>										
-											<!-- subir imagen del producto
+											<!-- subir imagen del producto -->
 											<div class="mdl-textfield mdl-js-textfield">
 												<input type="file" name='picture'>
-											</div> -->
+											</div> <!-- end upload_picture --> 
 										</div>
 									</div>
 									<p class="text-center">
@@ -159,7 +172,9 @@ if ($barcode && $name && $stock && $price) {
 					</div>
 				</div>
 			</div>
-			<!-- LISTA DE PRODUCTOS -->
+			<!-- ===========================
+					LISTA DE PRODUCTOS 
+				 =========================== -->
 			<div class="mdl-tabs__panel is-active" id="tabListProducts">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
@@ -190,7 +205,7 @@ if ($barcode && $name && $stock && $price) {
 						</nav>
 						<!-- muestra de productos -->
 						<?php
-							$querylist = 'SELECT products.id, products.name, products.stock, categories.name as category
+							$querylist = 'SELECT products.id, products.name, products.stock, products.picture, categories.name as category
 											FROM products 
 											INNER JOIN categories ON products.category_id = categories.id;';
 							$stm = $conn->query($querylist);
@@ -201,17 +216,16 @@ if ($barcode && $name && $stock && $price) {
 							<?php foreach($rows as $row): ?>
 							<div class="mdl-card mdl-shadow--2dp full-width product-card">							
 								<div class="mdl-card__title">
-									<img src="assets/img/fontLogin.jpg" alt="product" class="img-responsive">
+								<?php echo '<img src="/assets/img/products_pictures/'. $row['picture'] .'" alt="product"  class="img-responsive">';	?>										
+
+									<!-- <img src="assets/img/frame_purple.jpg" alt="product" class="img-responsive"> -->
 								</div>
 								<div class="mdl-card__supporting-text">
 									<small><?php echo $row['stock']; ?></small><br>
 									<small><?php echo $row['category']; ?></small>
 								</div>
 								<div class="mdl-card__actions mdl-card--border">
-									<?php echo $row['name']; ?>
-									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="menumore">
-										<i class="zmdi zmdi-more"></i>
-									</button>
+									<?php echo $row['name']; ?>									
 								</div>							
 							</div>
 							<?php endforeach; ?> 						

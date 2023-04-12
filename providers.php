@@ -116,7 +116,7 @@ if ($name && $address) {
 			</div>
 			<!-- === listado de proveedores === -->
 			<?php
-				$querylist = 'SELECT name, phone from providers';
+				$querylist = 'SELECT id, name, phone, email from providers';
 				$stm = $conn->query($querylist);
 				$rows = $stm->fetchAll();
 			?>
@@ -150,11 +150,14 @@ if ($name && $address) {
 									<div class="mdl-list__item mdl-list__item--two-line">
 										<span class="mdl-list__item-primary-content">
 											<i class="zmdi zmdi-truck mdl-list__item-avatar"></i>
+											<span type="hidden" name="id" value="<?php echo $row["id"]; ?>"></span>
 											<span><?php echo $row['name']; ?></span>
 											<span class="mdl-list__item-sub-title"><?php echo $row['phone']; ?></span>
 										</span>
-										<a href="edit_providers.php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
-										<a href="delete_providers.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
+										
+										<a href="edit_providers.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
+										<a href="delete_providers.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
+										
 									</div>
 									<li class="full-width divider-menu-h"></li>
 									<?php endforeach; ?>

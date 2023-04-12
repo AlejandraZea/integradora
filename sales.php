@@ -1,3 +1,8 @@
+<?php
+session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
+require_once ('conexion.php'); //conexion a la base de datos
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,21 +46,38 @@
 		<div class="mdl-grid">
 			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
 				<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-					<thead>
+				<?php
+					$querylist = 'SELECT tickets.id, tickets.user_id, tickets.date, tickets.amount, users.name AS user 
+									FROM tickets
+									INNER JOIN users ON tickets.user_id = users.id';
+					$stm = $conn->query($querylist);
+					$rows = $stm->fetchAll();
+				?>		
+					<thead>						
 						<tr>
-							<th class="mdl-data-table__cell--non-numeric">Date</th>
-							<th>No. Ticket</th>
-							<th>Tipo de Pago</th>
-							<th>Total</th>
-						</tr>
+							<th class="mdl-data-table__cell--non-numeric">No. Ticket</th>
+							<th class="mdl-data-table__cell--non-numeric">Fecha</th>
+							<th class="mdl-data-table__cell--non-numeric">Usuario</th>
+							<th >Total</th>
+						</tr>						
 					</thead>
 					<tbody>
-						<tr>
-							<td class="mdl-data-table__cell--non-numeric">11/04/2016</td>
-							<td>numero de ticket</td>
-							<td>Tarjeta - Efectivo</td>
-							<td>$77</td>
-						</tr>
+						<?php foreach ($rows as $row): ?>							
+								<tr>
+										<td class="mdl-data-table__cell--non-numeric"><?php echo $row['id']; ?></td>
+										<td class="mdl-data-table__cell--non-numeric"><?php echo $row['date']; ?></td>										
+										<td class="mdl-data-table__cell--non-numeric"><?php echo $row['user']; ?></td><!-- hacer un inner join para mostrar el nombre del usuario -->
+										<td>$ <?php echo $row['amount']; ?></td>
+										<td>
+											<!-- boton para detalle de ticket -->
+											<a href="view_ticket.php?id=<?php echo $row['id']; ?>">
+												<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+													Ver Ticket
+												</button>
+											</a>
+										</td>
+								</tr>							
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

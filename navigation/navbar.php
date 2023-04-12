@@ -16,7 +16,14 @@ session_start();//iniciar sesion
 					<li class="text-condensedLight noLink" ><small><?php echo $_SESSION['user']['name'] . " " . $_SESSION['user']['lastname']; ?></small></li>
 					<li class="noLink">
 						<figure>
-							<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive">
+						<?php
+							if(empty($_SESSION['user']['avatar'])){
+								echo '<i class="zmdi zmdi-account mdl-list__item-avatar"></i>';
+
+							}else{
+								echo '<img src="/assets/img/'. $_SESSION['user']['avatar'] .'" width="50px">';
+							}
+						?>
 						</figure>
 					</li>
 				</ul>

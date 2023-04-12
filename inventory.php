@@ -84,13 +84,21 @@ if ($barcode && $name && $stock && $price) {
 					<tbody><!-- cuerpo de la tabla -->
 						<?php foreach($rows as $row): ?>
 							<tr>
-								<td class="mdl-data-table__cell--non-numeric"><?php echo $row['name']; ?></td>
-								<td><?php echo $row['barcode']; ?></td>
-								<td><?php echo $row['category']; ?></td>
-								<td><?php echo $row['stock']; ?></td>
-								<td><?php echo $row['price']; ?></td>
-								<td><a href="edit_products.php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
-								<a href="delete_products.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a></td>							</tr>
+								<form action="update_stock.php" method="POST">
+									<input type="hidden" name="id" value="<?php echo $row["id"]; ?>">
+									<td class="mdl-data-table__cell--non-numeric"><?php echo $row['name']; ?></td>
+									<td><?php echo $row['barcode']; ?></td>
+									<td><?php echo $row['category']; ?></td>
+									<td><input type="number" name="stock" min="0" style="width: 80px;" value="<?php echo $row['stock']; ?>"></td>
+									<td><?php echo $row['price']; ?></td>								
+									<td>
+										<!-- boton para guardar producto -->
+										<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+											Guardar
+										</button>							
+									</td>
+								</form>			
+							</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>

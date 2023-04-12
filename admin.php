@@ -7,22 +7,19 @@ $name = isset($_POST['name'])? $_POST['name']:'';
 $lastname = isset($_POST['lastname'])? $_POST['lastname']:''; 
 $username = isset($_POST['username'])? $_POST['username']:''; 
 $password = isset($_POST['password'])? $_POST['password']:''; 
+$avatar = isset($_POST['avatar'])? $_POST['avatar']:''; 
 $message = '';
 
 //ingresar datos
 if ($username && $password) {
 	$password =	password_hash($password, PASSWORD_BCRYPT);//enctriptar la contraseña del usuario
-	$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (:name, :lastname, :username, :password)');
+	$query = $conn->prepare('INSERT INTO users (name, lastname, username, password, role_id, avatar) VALUES (:name, :lastname, :username, :password, 1, :avatar)');
 	$query->bindParam(':name', $name, PDO::PARAM_STR);
 	$query->bindParam(':lastname', $lastname, PDO::PARAM_STR);
 	$query->bindParam(':username', $username, PDO::PARAM_STR);
 	$query->bindParam(':password', $password, PDO::PARAM_STR);
+	$query->bindParam(':avatar', $avatar, PDO::PARAM_STR);
 	$query->execute();
-
-
-	// manera corta de usar bindparam
-	//$query = $conn->prepare('INSERT INTO users (name, lastname, username, password) VALUES (?, ?, ?, ?)');
-	//$query->execute([$name,$lastname,$username,$password]);
 
 	//verificar datos
 	if ($query === TRUE) {		
@@ -104,14 +101,23 @@ if ($username && $password) {
 												<label class="mdl-textfield__label" for="LastNameAdmin">Apellidos</label>
 												<span class="mdl-textfield__error">Apellido inválido</span>
 											</div>
-											<!--  agregar el rol de usuario, hay que crearle su for y el id para rol
-											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-												<input class="mdl-textfield__input" type="text" pattern="-?[A-Za-záéíóúÁÉÍÓÚ ]*(\.[0-9]+)?" id="RolUsuario">
-												<label class="mdl-textfield__label" for="LastNameAdmin">Rol de usuario</label>
-												<span class="mdl-textfield__error">Rol de usuario inválido</span>
-											</div> 
-											-->
+												<!-- select de id  -->
+												<div class="mdl-textfield mdl-js-textfield">
+													<h5>Selecciona un rol</h5>
+													<select name="role_id" class="mdl-textfield__input">
+														<?php
+														$query=$conn->query('SELECT id, name FROM roles');
+														$rows = $query->fetchAll();
+														?>
+														<?php foreach($rows as $row): ?>
+															<option value="<?php echo $row['id'] ?>">
+																<?php echo $row['name'] ?>
+															</option>
+														<?php endforeach; ?>
+													</select>
+												</div><!-- select de id  -->
 										</div>
+
 										<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--6-col-desktop">
 											<h5 class="text-condensedLight">Detalles de cuenta de usuario</h5>
 											<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -126,25 +132,25 @@ if ($username && $password) {
 											</div>
 											<h5 class="text-condensedLight">Selecciona tu imagen de Perfil</h5>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-												<input type="radio" id="option-1" class="mdl-radio__button" name="options" value="avatar-male.png">
+												<input default type="radio" id="option-1" class="mdl-radio__button" name="avatar" value="avatar-male.png">
 												<img src="assets/img/avatar-male.png" alt="avatar" style="height: 45px; width="45px;" ">
 												<span class="mdl-radio__label">Perfil 1</span>
 											</label>
 											<br><br>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-												<input type="radio" id="option-2" class="mdl-radio__button" name="options" value="avatar-female.png">
+												<input type="radio" id="option-2" class="mdl-radio__button" name="avatar" value="avatar-female.png">
 												<img src="assets/img/avatar-female.png" alt="avatar" style="height: 45px; width="45px;" ">
 												<span class="mdl-radio__label">Perfil 2</span>
 											</label>
 											<br><br>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-												<input type="radio" id="option-3" class="mdl-radio__button" name="options" value="avatar-male2.png">
+												<input type="radio" id="option-3" class="mdl-radio__button" name="avatar" value="avatar-male2.png">
 												<img src="assets/img/avatar-male2.png" alt="avatar" style="height: 45px; width="45px;" ">
 												<span class="mdl-radio__label">Perfil 3</span>
 											</label>
 											<br><br>
 											<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
-												<input type="radio" id="option-4" class="mdl-radio__button" name="options" value="avatar-female2.png">
+												<input type="radio" id="option-4" class="mdl-radio__button" name="avatar" value="avatar-female2.png">
 												<img src="assets/img/avatar-female2.png" alt="avatar" style="height: 45px; width="45px;" ">
 												<span class="mdl-radio__label">Perfil 4</span>
 											</label>
@@ -165,7 +171,7 @@ if ($username && $password) {
 
 			<!-- ===== LISTA DE USUARIOS ===== -->
 			<?php
-				$querylist = 'SELECT id, name, lastname, username FROM users';
+				$querylist = 'SELECT id, name, lastname, username, avatar FROM users';
 				$stm = $conn->query($querylist);
 				$rows = $stm->fetchAll();
 			?>
@@ -198,13 +204,23 @@ if ($username && $password) {
 									?>
 									<?php foreach ($rows as $row): ?>							
 										<div class="mdl-list__item mdl-list__item--two-line">
+											<span>
+												<?php
+													if(empty($row['avatar'])){
+														echo '<i class="zmdi zmdi-account mdl-list__item-avatar"></i>';
+
+													}else{
+														echo '<img src="/assets/img/'. $row['avatar'] .'" width="50px">';
+													}
+												?>
+											</span>
 											<span class="mdl-list__item-primary-content">
-												<i class="zmdi zmdi-account mdl-list__item-avatar"></i>
+												
 												<span><?php echo $row['name'].' '.$row['lastname']; ?></span>
 												<span class="mdl-list__item-sub-title"><?php echo $row['username']; ?></span>
 											</span>
-										<a href="edit_users.php"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
-										<a href="delete_users.php"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a><!-- ancla -->
+										<a href="edit_users.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></a>
+										<a href="delete_users.php?id=<?php echo $row['id']; ?>"><button class="mdl-button mdl-js-button mdl-button--accent">Eliminar</button></a>
 										</div>
 										<li class="full-width divider-menu-h"></li>
 									<?php endforeach; ?>
