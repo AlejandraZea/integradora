@@ -1,8 +1,17 @@
 <?php
 session_start(); //se crea una sesion o reanuda la actual basada en un identificador para el navegador
 require_once ('conexion.php'); //conexion a la base de datos
-?>
 
+// comprobar que si traiga info el ticket y que exista
+//si no existe mostrar no existe
+
+//si existe traer todos los articulos con descripción y nombres
+//con inner join
+
+
+//eliminar ticket
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
