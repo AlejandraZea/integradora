@@ -9,7 +9,7 @@ $message = '';
 
 //Insertar datos
 if ($name && $description) {
-	$query = $conn->prepare('INSERT INTO categories (name, description) VALUES (:name, :description)');
+	$query = $conn->prepare("CALL insert_category(:name, :description)");
 	$query->bindParam(':name', $name, PDO::PARAM_STR);
 	$query->bindParam(':description', $description, PDO::PARAM_STR);
 	$query->execute();
